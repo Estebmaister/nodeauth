@@ -1,25 +1,23 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "fcc-advanced-node-and-express",
-  "author": "http://github.com/JosephLivengood",
-  "version": "0.0.1",
-  "description": "What am I about?",
+  "name": "advanced-node-and-express",
+  "author": "http://github.com/estebmaister",
+  "version": "0.2.0",
+  "description": "An application for advance functions in NodeJS",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.16.1",
-    "cors": "^2.8.1"
+    "pug": "^3.0.0"
   },
   "engines": {
     "node": "^12.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://glitch.com/#!/project/welcome-project"
+    "url": "http://github.com/estebmaister/nodeauth"
   },
   "keywords": [
     "node",
