@@ -12,7 +12,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.route("/").get((req, res) => {
-  res.render("pug");
+  res.render("pug", { title: "Hello", message: "Please login" });
+});
+
+app.route("/profile").get((req, res) => {
+  res.render(process.cwd() + "/views/pug/profile", {
+    title: "Hello",
+    message: "Please login",
+  });
 });
 
 module.exports = app;
