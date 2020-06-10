@@ -1,0 +1,82 @@
+"use strict";
+
+const express = require("express");
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+const saltRounds = 12;
+
+module.exports = (app, db) => {
+  app.set("view engine", "pug");
+  app.use("/public", express.static(process.cwd() + "/public"));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  app.route("/").get((req, res) => {
+    res.render("pug", {
+      title: "Hello",
+      message: "Please login",
+      showLogin: true,
+      showRegistration: true,
+    });
+  });
+
+  app
+    .route("/login")
+    .post(
+      passport.authenticate("local", { failureRedirect: "/" }),
+      (req, res) => res.redirect("/profile")
+    );
+
+  const ensureAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect("/");
+  };
+
+  app.route("/profile").get(ensureAuthenticated, (req, res) => {
+    res.render(process.cwd() + "/views/pug/profile", {
+      username: req.user.username,
+    });
+  });
+
+  app.route("/logout").get((req, res) => {
+    req.logout();
+    res.redirect("/");
+  });
+
+  app.route("/register").post(
+    (req, res, next) => {
+      db.collection("users").findOne(
+        { username: req.body.username },
+        (err, user) => {
+          if (err) next(err);
+          if (user) return res.redirect("/");
+          const hash = bcrypt.hashSync(req.body.password, saltRounds);
+          db.collection("users").insertOne(
+            {
+              username: req.body.username,
+              email: req.body.email,
+              password: hash,
+            },
+            (err, doc) => {
+              if (err) {
+                console.log("Error inserting user in db");
+                return res.redirect("/");
+              }
+              next(null, user);
+            }
+          );
+        }
+      );
+    },
+    passport.authenticate("local", { failureRedirect: "/" }),
+    (req, res, next) => {
+      res.redirect("/profile");
+    }
+  );
+
+  app.use((req, res, next) => {
+    res.status(404).type("text").send("Not Found");
+  });
+};

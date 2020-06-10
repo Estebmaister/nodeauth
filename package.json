@@ -16,6 +16,7 @@
     "nodemailer": "^6.4.8",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "bcrypt": "^4.0.1",
     "pug": "^3.0.0"
   },
   "engines": {
