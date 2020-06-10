@@ -1,5 +1,6 @@
 @import "form.css";
 @import "littleCat.css";
+@import "panes.css";
 
 :root {
   --space-root: 1rem;

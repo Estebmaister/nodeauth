@@ -1,11 +1,26 @@
 html
   head
-    title FCC Advanced Node and Express
-    meta(name='description', content='Profile')
+    title #{username}'s profile
+    meta(name='description', content='Profile section')
+    meta(name="author" content="Esteban Camargo")
     meta(charset='utf-8')
+    meta(name="keywords" content="backend pug")
+
+    //- WhatsApp Description
+    meta(property="og:title" content="Backend server")
+    meta(property="og:description" content="Esteban's backend server in NodeJS, for customizable actions")
+    meta(property="og:image" content="https://estebmaister.com.ve/assets/images/profile.png")
+    meta(property="og:url" content="https://node-esteb.glitch.me/")
+    meta(property="og:type" content="website")
+    meta(property="og:site_name" content="Estebmaister")
+
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+
+    link(rel="shortcut icon", href="./public/img/favicon.ico", type="image/x-icon")
     link(rel='stylesheet', href='/public/style.css')
   body
     h1.border.center FCC Advanced Node and Express
     //add your code below, make sure its indented at this level
+    h2.center#welcome Welcome, #{username}!
+    a(href='/logout') Logout
