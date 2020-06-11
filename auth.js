@@ -1,10 +1,24 @@
 "use strict";
+
+const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ObjectID = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
+const config = require("./config.js");
 
 module.exports = (app, db) => {
+  app.use(
+    session({
+      secret: config.SESSION_SECRET,
+      resave: true,
+      saveUninitialized: true,
+    })
+  );
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   passport.serializeUser((user, done) => {
     done(null, user._id);
   });

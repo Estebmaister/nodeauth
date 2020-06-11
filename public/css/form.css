@@ -1,5 +1,5 @@
 /*Form style*/
-input[type="text"] {
+input {
   background-color: var(--color-contrast);
 }
 

@@ -25,11 +25,15 @@ html(lang="en-US")
     h2#pug-success-message
     | Looks like this page is being rendered from Pug into HTML!
     | #{title}
-    p#pug-variable= message
+    p#pug-variable=message
+      | 
+      a#a-login(href='#') Login 
+      | / 
+      a#a-register(href='#') Register
     
     .pane-wrapper
       if showLogin
-        .pane
+        .pane.login
           p Login Form
           form(action='/login' method='post')
             .input-wrapper
@@ -52,7 +56,7 @@ html(lang="en-US")
             input.btn.btn--primary(type='submit' value='Log In')
     
       if showRegistration
-        .pane
+        .pane.register
           p Registration Form
           form(action='/register', method='post')
             .input-wrapper
