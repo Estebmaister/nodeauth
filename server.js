@@ -10,7 +10,7 @@ const config = require("./config.js");
 const app = express();
 fccTesting(app); //For FCC testing purposes
 
-app.use("/public", express.static(process.cwd() + "/public"));
+app.use("/", express.static(process.cwd() + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

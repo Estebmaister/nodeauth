@@ -46,6 +46,7 @@ h1 {
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
   color: var(--color-primary);
   font-family: -apple-system, Roboto, sans-serif;
