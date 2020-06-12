@@ -1,8 +1,4 @@
 /*Form style*/
-input {
-  background-color: var(--color-contrast);
-}
-
 #f1 {
   -webkit-box-flex: 1;
   flex: 1 1 0;
@@ -23,6 +19,9 @@ input {
 }
 .input-wrapper:focus-within .icon {
   background-color: var(--color-secondary);
+}
+.input-wrapper:focus-within .icon-show {
+  background: unset;
 }
 .input-wrapper:focus-within input {
   border-color: var(--color-secondary);
@@ -46,6 +45,14 @@ input {
   border-top-left-radius: var(--base-border-radius);
   border-bottom-left-radius: var(--base-border-radius);
   pointer-events: none;
+}
+.input-group .icon-show {
+  position: absolute;
+  z-index: 2;
+  left: unset;
+  right: 0;
+  background: unset;
+  cursor: pointer;
 }
 
 label {
@@ -83,6 +90,14 @@ label {
   transition: transform var(--duration) var(--ease),
     -webkit-transform var(--duration) var(--ease);
 }
+.icon-show svg {
+  fill: var(--color-secondary);
+  -webkit-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  pointer-events: all;
+}
 
 input {
   -webkit-box-flex: 1;
@@ -94,6 +109,7 @@ input {
   font-family: var(--font-family);
   color: var(--color-secondary);
   border: 2px solid var(--color-primary);
+  background-color: var(--color-contrast);
 }
 input:focus {
   color: var(--color-primary);

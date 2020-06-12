@@ -13,7 +13,7 @@
   justify-content: space-evenly;
 }
 .pane {
-  border: solid 1px #999;
+  /* border: solid 1px #999; */
   border-radius: 10px;
   min-width: 500px;
   margin: 7px;

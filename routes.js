@@ -12,7 +12,7 @@ module.exports = (app, db) => {
 
   app.route("/").get((req, res) => {
     res.render("pug", {
-      title: "Hello",
+      title: "Welcome",
       message: "Please",
       showLogin: true,
       showRegistration: true,
