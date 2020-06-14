@@ -34,6 +34,7 @@ body {
   font-family: var(--font-family);
   line-height: 1.2;
   background-color: var(--color-tertiary);
+  text-align: center;
 }
 
 header {
@@ -49,10 +50,9 @@ a {
   cursor: pointer;
   text-decoration: none;
   color: var(--color-primary);
-  font-family: -apple-system, Roboto, sans-serif;
-  font-size: 1.5rem;
+  font-family: -apple-system, var(--font-family);
+  font-size: calc(var(--font-size) * 1.2);
   font-weight: bold;
-  text-align: center;
 }
 a:hover {
   color: var(--color-contrast);

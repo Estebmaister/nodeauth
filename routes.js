@@ -16,8 +16,16 @@ module.exports = (app, db) => {
       message: "Please",
       showLogin: true,
       showRegistration: true,
+      lastLogin: false,
+      lastRegister: false,
     });
   });
+
+  app.get("/forgot", (req, res) => res.render("pug/forgot", {}));
+
+  app.post("/reset", (req, res) =>
+    res.render("pug/reset", { username: req.body.username })
+  );
 
   app
     .route("/login")
@@ -35,14 +43,14 @@ module.exports = (app, db) => {
   app.route("/register").post(
     (req, res, next) => {
       db.collection("users").findOne(
-        { username: req.body.username },
+        { username: req.body.username.toLowerCase() },
         (err, user) => {
           if (err) next(err);
           if (user) return res.redirect("/");
           const hash = bcrypt.hashSync(req.body.password, saltRounds);
           db.collection("users").insertOne(
             {
-              username: req.body.username,
+              username: req.body.username.toLowerCase(),
               email: req.body.email,
               password: hash,
             },

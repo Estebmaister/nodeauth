@@ -19,9 +19,7 @@ module.exports = (app, db) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  passport.serializeUser((user, done) => {
-    done(null, user._id);
-  });
+  passport.serializeUser((user, done) => done(null, user._id));
 
   passport.deserializeUser((id, done) => {
     db.collection("users").findOne({ _id: new ObjectID(id) }, (err, doc) => {
@@ -32,14 +30,17 @@ module.exports = (app, db) => {
 
   passport.use(
     new LocalStrategy((username, password, done) => {
-      db.collection("users").findOne({ username: username }, (err, user) => {
-        console.log("User " + username + " attempted to log in.");
-        if (err) return done(err);
-        if (!user) return done(null, false);
-        if (!bcrypt.compareSync(password, user.password))
-          return done(null, false);
-        return done(null, user);
-      });
+      db.collection("users").findOne(
+        { username: username.toLowerCase() },
+        (err, user) => {
+          console.log("User " + username + " attempted to log in.");
+          if (err) return done(err);
+          if (!user) return done(null, false);
+          if (!bcrypt.compareSync(password, user.password))
+            return done(null, false);
+          return done(null, user);
+        }
+      );
     })
   );
 };

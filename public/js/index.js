@@ -72,10 +72,10 @@ if (aLogin) {
 
 // ___ Little cat moving eyes ___ //
 
-var pupil = document.getElementsByClassName("pupil");
+const pupil = document.getElementsByClassName("pupil");
 if (pupil) {
   document.onmousemove = () => {
-    var x = (event.clientX * 8) / window.innerWidth + "%";
+    var x = (event.clientX * 4) / window.innerWidth + "%";
     var y = (event.clientY * 8) / window.innerHeight + "%";
 
     for (var i = 0; i < 4; i++) {

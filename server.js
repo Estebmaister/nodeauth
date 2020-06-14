@@ -10,14 +10,14 @@ const config = require("./config.js");
 const app = express();
 fccTesting(app); //For FCC testing purposes
 
+const mail = require("./mail.js");
+//mail().catch(console.error);
+
 app.use("/", express.static(process.cwd() + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "pug");
-
-// const mail = require("./mail.js");
-// mail().catch(console.error);
 
 // const pug = require("pug");
 // const path = require("path");

@@ -11,9 +11,9 @@ html(lang="en-US")
     | Rendered from Pug into HTML! #{title}
     p#pug-variable=message
       | 
-      a#a-login Login 
+      a#a-login تَسْجيل دُخولٍ
       | / 
-      a#a-register Register
+      a#a-register سِجِلّ
     if lastLogin
       p#last-login(style="color:red") Last login was fail
     if lastRegister
@@ -21,18 +21,21 @@ html(lang="en-US")
     .pane-wrapper
       if showLogin
         .pane.login
-          p Login Form
-          form(action='/login' method='post')
+          p تَسْجيل دُخولٍ
+          form#formLogin(action='/login' method='post')
             .input-wrapper
-              label(for='username') Username:
+              label(for='username') اسْم مُسْتَخْدِمٍ :
               .input-group
                 span.icon
                   svg(viewbox='0 0 24 24')
                     path(d='M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z')
-                input#username(type='text' name='username' required placeholder='Esteban')
+                input#username(type='text' name='username' required onkeyup='return forceLower(this);' placeholder='esteban')
+                //- Script to force lower case input
+                script const forceLower = (strInput) => strInput.value=strInput.value.toLowerCase();
+                style #username {text-transform:lowercase;}
                 br
             .input-wrapper
-              label(for='password') Password :
+              label(for='password') كَلِمة سِرٍّ :
               .input-group
                 span.icon
                   svg(viewbox='0 0 24 24')
@@ -44,14 +47,16 @@ html(lang="en-US")
                     path.path-show(display="block" d='M510.096,249.937c-4.032-5.867-100.928-143.275-254.101-143.275C124.56,106.662,7.44,243.281,2.512,249.105 c-3.349,3.968-3.349,9.792,0,13.781C7.44,268.71,124.56,405.329,255.995,405.329S504.549,268.71,509.477,262.886 C512.571,259.217,512.848,253.905,510.096,249.937z M255.995,383.996c-105.365,0-205.547-100.48-230.997-128 c25.408-27.541,125.483-128,230.997-128c123.285,0,210.304,100.331,231.552,127.424 C463.013,282.065,362.256,383.996,255.995,383.996z M255.995,170.662c-47.061,0-85.333,38.272-85.333,85.333s38.272,85.333,85.333,85.333s85.333-38.272,85.333-85.333 S303.056,170.662,255.995,170.662z M255.995,319.996c-35.285,0-64-28.715-64-64s28.715-64,64-64s64,28.715,64,64 S291.28,319.996,255.995,319.996z')
                 br
             br
-            input.btn.btn--primary(type='submit' value='Log In')
+            input.btn.btn--primary(type='submit' value='تَسْجيل دُخولٍ')
+            br
+            a#forgot-password(href='./forgot') Forgot password?
     
       if showRegistration
         .pane.register
-          p Registration Form
-          form(action='/register', method='post')
+          p اسْتِئْمارة اشْتِراكٍ
+          form#formRegister(action='/register', method='post')
             .input-wrapper
-              label(for='reg-email') Email :
+              label(for='reg-email') رِسالة إيميل :
               .input-group
                 span.icon
                   svg(viewbox='0 0 20 20')
@@ -59,15 +64,18 @@ html(lang="en-US")
                 input#reg-email(type='email' name='email' required placeholder='some@example.com' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$' title='It must be something like your.contact-info@domain.com')
                 br
             .input-wrapper
-              label(for='reg-username') Username:
+              label(for='reg-username') اسْم مُسْتَخْدِمٍ :
               .input-group
                 span.icon
                   svg(viewbox='0 0 24 24')
                     path(d='M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z')
-                input#reg-username(type='text' name='username' required placeholder='Esteban')
+                input#reg-username(type='text' name='username' required onkeyup='return forceLowerC(this);' placeholder='esteban')
+                //- Script to force lower case input
+                script const forceLowerC = (strInput) => strInput.value=strInput.value.toLowerCase();
+                style #reg-username {text-transform:lowercase;}
                 br
             .input-wrapper
-              label(for='reg-password') Password :
+              label(for='reg-password') كَلِمة سِرٍّ :
                 |  
                 span#caps-message
               .input-group
@@ -83,7 +91,7 @@ html(lang="en-US")
                     path.path-show(display="block" d='M510.096,249.937c-4.032-5.867-100.928-143.275-254.101-143.275C124.56,106.662,7.44,243.281,2.512,249.105 c-3.349,3.968-3.349,9.792,0,13.781C7.44,268.71,124.56,405.329,255.995,405.329S504.549,268.71,509.477,262.886 C512.571,259.217,512.848,253.905,510.096,249.937z M255.995,383.996c-105.365,0-205.547-100.48-230.997-128 c25.408-27.541,125.483-128,230.997-128c123.285,0,210.304,100.331,231.552,127.424 C463.013,282.065,362.256,383.996,255.995,383.996z M255.995,170.662c-47.061,0-85.333,38.272-85.333,85.333s38.272,85.333,85.333,85.333s85.333-38.272,85.333-85.333 S303.056,170.662,255.995,170.662z M255.995,319.996c-35.285,0-64-28.715-64-64s28.715-64,64-64s64,28.715,64,64 S291.28,319.996,255.995,319.996z')
                 br
             .input-wrapper
-              label(for='confirm-password') Confirm Password :
+              label(for='confirm-password') أَكَّدَ كَلِمة سِرٍّ :
                 |  
                 span#confirm-message
               .input-group
@@ -102,7 +110,7 @@ html(lang="en-US")
                 br
               
             br
-            input#reg-submit.btn.btn--primary(type='submit' value='Register')
+            input#reg-submit.btn.btn--primary(type='submit' value='سِجِلّ')
     
     include includes/footer.pug
     include includes/littleCat.pug

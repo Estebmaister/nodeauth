@@ -1,0 +1,30 @@
+doctype html
+html(lang="en-US")
+  head
+    include includes/head.pug
+    link(rel="shortcut icon", href="./img/noauth.ico", type="image/x-icon")
+    link(rel='stylesheet', type="text/css", href='./css/style.css')
+
+  body
+    h1 Node server Password forgotten
+    h2 If you forgot your password, please insert your username and we will send you a message with a link for reestablishing it! #{title}
+    .pane-wrapper
+        .pane.login
+          p إعادة تعيين كلمة مرور تسجيل الدخول
+          //- Reset login password
+          form#formForgot(action='/reset' method='post')
+            .input-wrapper
+              label(for='username') اسْم مُسْتَخْدِمٍ :
+              .input-group
+                span.icon
+                  svg(viewbox='0 0 24 24')
+                    path(d='M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z')
+                input#username(type='text' name='username' required onkeyup='return forceLower(this);' placeholder='esteban')
+                script const forceLower = (strInput) => strInput.value=strInput.value.toLowerCase();
+                style #username {text-transform:lowercase;}
+                br
+            
+            br
+            //- Send Message button
+            input.btn.btn--primary(type='submit' value='إرسال بريد إلكتروني')
+    a(href='./') Back to login page
