@@ -51,12 +51,3 @@ const connections = async () => {
   );
 };
 connections();
-
-// mongo.connect(
-//   process.env.MONGO_URI,
-//   { useUnifiedTopology: true, useNewUrlParser: true },
-//   (err, db) => {
-//     if (err) return console.log("Database error: " + err);
-//     console.log("Successful database connection");
-//   }
-// );

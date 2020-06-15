@@ -2,7 +2,7 @@
 
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
+const LocalStrategy = require("passport-local").Strategy;
 const ObjectID = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const config = require("./config.js");

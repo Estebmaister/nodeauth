@@ -77,6 +77,6 @@ module.exports = (app, db) => {
   });
 
   app.use((req, res, next) => {
-    res.status(404).type("text").send("Not Found");
+    res.status(404).render(process.cwd() + "/views/pug/404");
   });
 };
