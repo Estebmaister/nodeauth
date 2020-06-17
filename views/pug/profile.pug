@@ -3,9 +3,11 @@ html
     title #{username}'s profile
     meta(name='description', content='Profile section')
     include includes/head.pug
-    link(rel="shortcut icon", href="./img/auth.ico", type="image/x-icon")
-    link(rel='stylesheet', type="text/css", href='./css/style.css')
+    link(rel="shortcut icon", href="/img/auth.ico", type="image/x-icon")
+    link(rel='stylesheet', type="text/css", href='/css/style.css')
+    link(rel='stylesheet', type="text/css", href='/css/multiForm.css')
   body
-    h1 Node server with Passport and Express
-    h2#welcome Welcome, #{username}!
+    h1 Welcome, #{username}!
+    include includes/multiForm.pug
     a(href='/logout') Logout
+    br

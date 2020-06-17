@@ -1,0 +1,83 @@
+/* Style the form */
+#multiForm {
+  background-color: white;
+  text-align: left;
+  margin: 2% auto;
+  width: 70%;
+  min-width: 300px;
+  padding: 5% 10%;
+  border-radius: var(--base-border-radius);
+  color: var(--color-secondary);
+}
+
+#steps {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Style the input fields */
+input {
+  width: 100%;
+  font-family: Raleway;
+  border: 1px solid #aaa;
+  border-radius: var(--base-border-radius);
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: var(--color-primary);
+}
+
+.btn {
+  display: inline;
+  margin-left: 3px;
+  padding: var(--space-xs) var(--space-s);
+  border: 2px solid transparent;
+  border-radius: var(--base-border-radius);
+}
+
+.btn--primary {
+  font-size: calc(var(--font-size) / 1.65);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.065rem;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-contrast);
+}
+.btn--primary:hover {
+  background-color: var(--color-contrast);
+  border-color: var(--color-contrast);
+  color: var(--color-primary);
+}
+.btn--primary:focus {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}

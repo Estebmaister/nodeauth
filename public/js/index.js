@@ -1,7 +1,5 @@
 // ___ Register Form Functionalities ___ //
 
-const password = document.getElementById("reg-password");
-
 // Show-hide password
 let iconsShow = document.getElementsByClassName("icon-show");
 const pathsHide = document.getElementsByClassName("path-hide");
@@ -24,14 +22,35 @@ for (let index = 0; index < iconsShow.length; index++) {
 }
 
 // Check CapsLock activated
-const capsLockMessage = document.getElementById("caps-message");
-password.addEventListener("keyup", (event) => {
+const regPassword = document.getElementById("reg-password");
+const regCapsLockMessage = document.getElementById("reg-caps-message");
+regPassword.addEventListener("keyup", (event) => {
   // If "caps lock" is pressed, display the warning text
-  if (event.getModifierState("CapsLock")) {
-    capsLockMessage.innerHTML = "Caps lock is ON";
-    capsLockMessage.style.color = "red";
-  } else {
-    capsLockMessage.innerHTML = "";
+  try {
+    if (event.getModifierState("CapsLock")) {
+      regCapsLockMessage.innerHTML = "Caps lock is ON";
+      regCapsLockMessage.style.color = "red";
+    } else {
+      regCapsLockMessage.innerHTML = "";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+const logPassword = document.getElementById("log-password");
+const logCapsLockMessage = document.getElementById("log-caps-message");
+logPassword.addEventListener("keyup", (event) => {
+  // If "caps lock" is pressed, display the warning text
+  try {
+    if (event.getModifierState("CapsLock")) {
+      logCapsLockMessage.innerHTML = "Caps lock is ON";
+      logCapsLockMessage.style.color = "red";
+    } else {
+      logCapsLockMessage.innerHTML = "";
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -41,7 +60,7 @@ const confirmMessage = document.getElementById("confirm-message");
 const check = () => {
   // If some value is added in confirmP o the password changes,
   // display the matching text
-  if (password.value == confirmPassword.value) {
+  if (regPassword.value == confirmPassword.value) {
     confirmMessage.style.color = "green";
     confirmMessage.innerHTML = "matching";
     confirmPassword.setCustomValidity("");
@@ -73,15 +92,15 @@ if (aLogin) {
 // ___ Little cat moving eyes ___ //
 
 const pupil = document.getElementsByClassName("pupil");
-if (pupil) {
+if (pupil[1]) {
   document.onmousemove = () => {
     var x = (event.clientX * 4) / window.innerWidth + "%";
     var y = (event.clientY * 8) / window.innerHeight + "%";
 
-    for (var i = 0; i < 4; i++) {
-      pupil[i].style.left = x;
-      pupil[i].style.top = y;
-      pupil[i].style.transform = "translate(" + x + "," + y + ")";
+    for (var index = 0; index < 4; index++) {
+      pupil[index].style.left = x;
+      pupil[index].style.top = y;
+      pupil[index].style.transform = "translate(" + x + "," + y + ")";
     }
   };
 }

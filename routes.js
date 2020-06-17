@@ -40,6 +40,10 @@ module.exports = (app, db) => {
     });
   });
 
+  app.route("/afterForm").post(ensureAuthenticated, (req, res) => {
+    res.json(req.body);
+  });
+
   app.route("/register").post(
     (req, res, next) => {
       db.collection("users").findOne(
