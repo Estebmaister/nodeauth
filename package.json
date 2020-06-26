@@ -1,7 +1,7 @@
 {
   "name": "advanced-node-and-express",
   "author": "http://github.com/estebmaister",
-  "version": "0.2.0",
+  "version": "1.2.0",
   "description": "An application for advance functions in NodeJS",
   "main": "server.js",
   "scripts": {

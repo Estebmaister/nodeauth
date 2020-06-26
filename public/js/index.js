@@ -1,5 +1,22 @@
 // ___ Register Form Functionalities ___ //
 
+// ___  Switch between LOGIN & REGISTER FORM ___ //
+
+const aLogin = document.querySelector("#a-login");
+if (aLogin) {
+  const aRegister = document.querySelector("#a-register");
+  const divLogin = document.querySelector(".login");
+  const divRegister = document.querySelector(".register");
+  aLogin.addEventListener("click", () => {
+    divLogin.style.display = "inline-block";
+    divRegister.style.display = "none";
+  });
+  aRegister.addEventListener("click", () => {
+    divRegister.style.display = "inline-block";
+    divLogin.style.display = "none";
+  });
+}
+
 // Show-hide password
 let iconsShow = document.getElementsByClassName("icon-show");
 const pathsHide = document.getElementsByClassName("path-hide");
@@ -71,23 +88,6 @@ const check = () => {
   }
   if (confirmPassword.value == "") confirmMessage.innerHTML = "";
 };
-
-// ___  Switch between LOGIN & REGISTER FORM ___ //
-
-const aLogin = document.querySelector("#a-login");
-if (aLogin) {
-  const aRegister = document.querySelector("#a-register");
-  const divLogin = document.querySelector(".login");
-  const divRegister = document.querySelector(".register");
-  aLogin.addEventListener("click", () => {
-    divLogin.style.display = "inline-block";
-    divRegister.style.display = "none";
-  });
-  aRegister.addEventListener("click", () => {
-    divRegister.style.display = "inline-block";
-    divLogin.style.display = "none";
-  });
-}
 
 // ___ Little cat moving eyes ___ //
 
