@@ -22,19 +22,24 @@
 * {
   box-sizing: border-box;
 }
-
-body {
-  display: grid;
-  place-items: center;
+html {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+}
+body {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
+  margin: 0;
+  padding: 0;
+  height: 95vh;
+  place-items: center;
+  text-align: center;
   color: var(--color-contrast);
-  padding: var(--space-m);
   font-size: var(--font-size);
   font-family: var(--font-family);
   line-height: 1.2;
   background-color: var(--color-tertiary);
-  text-align: center;
 }
 
 header {
@@ -44,6 +49,12 @@ header {
 h1 {
   font-weight: 700;
   font-size: calc(var(--font-size) * 2.5);
+}
+h1,
+h2,
+h3,
+h4 {
+  padding: 1em 1em 0 1em;
 }
 
 a {
@@ -70,4 +81,86 @@ a:hover + .arrow {
 }
 a:focus {
   color: var(--color-secondary);
+}
+
+/* -------- Buttons -------- */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+button {
+  -webkit-appearance: button;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+  padding: 1px 6px;
+  border-width: 2px;
+  border-style: outset;
+}
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+  padding: var(--space-m) var(--space-l);
+}
+.btn:hover {
+  color: #000;
+  background-color: #ccc;
+}
+.btn--primary {
+  border: 2px solid transparent;
+  border-radius: var(--base-border-radius);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-contrast);
+  font-size: calc(var(--font-size) / 1.65);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.065rem;
+}
+.btn--primary:hover {
+  background-color: var(--color-contrast);
+  border-color: var(--color-contrast);
+  color: var(--color-primary);
+}
+.btn--primary:focus {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.btn--secondary {
+  border: 2px solid transparent;
+  border-radius: var(--base-border-radius);
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--color-contrast);
+}
+.btn--secondary:hover {
+  background-color: var(--color-contrast);
+  border-color: var(--color-contrast);
+  color: var(--color-secondary);
+}
+.btn--secondary:focus {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }

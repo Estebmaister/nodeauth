@@ -23,8 +23,8 @@ form#multiForm(action='/afterForm' method='POST')
 			input(type='number' name='year' min='1920' max='2020' maxlength='4' size='2' placeholder='YYYY' oninput="this.className = ''")
 	div(style='overflow:auto;')
 		div(style='float:right;')
-			button#prevBtn.btn.btn--primary(type='button' onclick='nextPrev(-1)') Previous
-			button#nextBtn.btn.btn--primary(type='button' onclick='nextPrev(1)') Next
+			button#prevBtn.btn.btn--primary.btn--multi(type='button' onclick='nextPrev(-1)') Previous
+			button#nextBtn.btn.btn--primary.btn--multi(type='button' onclick='nextPrev(1)') Next
 	//- Circles which indicates the steps of the form:
 	#steps
 		span.step

@@ -3,14 +3,14 @@
 const express = require("express");
 const fccTesting = require("./freeCodeCamp/fcctesting.js");
 const mongoClient = require("mongodb").MongoClient;
-const routes = require("./routes.js");
-const auth = require("./auth.js");
-const config = require("./config.js");
+const routes = require("./app/routes.js");
+const auth = require("./app/auth.js");
+const config = require("./app/config.js");
 
 const app = express();
 fccTesting(app); //For FCC testing purposes
 
-const mail = require("./mail.js");
+const mail = require("./app/mail.js");
 //mail().catch(console.error);
 
 app.use("/", express.static(process.cwd() + "/public"));

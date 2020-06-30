@@ -41,35 +41,35 @@ for (let index = 0; index < iconsShow.length; index++) {
 // Check CapsLock activated
 const regPassword = document.getElementById("reg-password");
 const regCapsLockMessage = document.getElementById("reg-caps-message");
-regPassword.addEventListener("keyup", (event) => {
-  // If "caps lock" is pressed, display the warning text
-  try {
+try {
+  regPassword.addEventListener("keyup", (event) => {
+    // If "caps lock" is pressed, display the warning text
     if (event.getModifierState("CapsLock")) {
       regCapsLockMessage.innerHTML = "Caps lock is ON";
       regCapsLockMessage.style.color = "red";
     } else {
       regCapsLockMessage.innerHTML = "";
     }
-  } catch (error) {
-    console.log(error);
-  }
-});
+  });
+} catch (error) {
+  console.log("Can´t check capsLock: ", error);
+}
 
 const logPassword = document.getElementById("log-password");
 const logCapsLockMessage = document.getElementById("log-caps-message");
-logPassword.addEventListener("keyup", (event) => {
-  // If "caps lock" is pressed, display the warning text
-  try {
+try {
+  logPassword.addEventListener("keyup", (event) => {
+    // If "caps lock" is pressed, display the warning text
     if (event.getModifierState("CapsLock")) {
       logCapsLockMessage.innerHTML = "Caps lock is ON";
       logCapsLockMessage.style.color = "red";
     } else {
       logCapsLockMessage.innerHTML = "";
     }
-  } catch (error) {
-    console.log(error);
-  }
-});
+  });
+} catch (error) {
+  console.log("Can´t check capsLock: ", error);
+}
 
 // Check confirm password
 const confirmPassword = document.getElementById("confirm-password");
