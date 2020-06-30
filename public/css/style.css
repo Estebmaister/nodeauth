@@ -92,6 +92,7 @@ button,
 }
 button {
   -webkit-appearance: button;
+  writing-mode: horizontal-tb;
   -webkit-writing-mode: horizontal-tb !important;
   text-rendering: auto;
   display: inline-block;
