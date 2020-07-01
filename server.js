@@ -1,35 +1,31 @@
 "use strict";
 
-const express = require("express");
-const fccTesting = require("./freeCodeCamp/fcctesting.js");
-const mongoClient = require("mongodb").MongoClient;
+const config = require("./app/config.js");
 const routes = require("./app/routes.js");
 const auth = require("./app/auth.js");
-const config = require("./app/config.js");
-
-const app = express();
-fccTesting(app); //For FCC testing purposes
-
-const mail = require("./app/mail.js");
+const socketServer = require("./app/socket.js");
+//const mail = require("./app/mail.js");
 //mail().catch(console.error);
 
+const mongoClient = require("mongodb").MongoClient;
+const express = require("express");
+const app = require("express")();
+const http = require("http").Server(app);
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const sessionStore = new session.MemoryStore();
+
+app.use(cookieParser());
 app.use("/", express.static(process.cwd() + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "pug");
 
-// const pug = require("pug");
-// const path = require("path");
-// app.use(express.static(path.join(__dirname, "public")));
-// const bodyParser  = require('body-parser');
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
 // ______ CONNECTIONS TO DB & PORT ________ //
 
 const connections = async () => {
-  let db = await mongoClient
+  const db = await mongoClient
     .connect(config.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
@@ -38,16 +34,15 @@ const connections = async () => {
     .catch((err) => console.log("Database error: " + err));
   console.log("Successful database connection to: " + db.s.namespace);
 
-  auth(app, db);
+  auth(app, sessionStore, db);
   routes(app, db);
+  socketServer(http, sessionStore, db);
 
   const port = config.PORT || 3001;
-  const listener = app.listen(port, "localhost", () =>
-    console.log(
-      `Server is listening at http://${listener.address().address}:${
-        listener.address().port
-      }`
-    )
-  );
+  const listener = http.listen(port, "localhost", () => {
+    const { address, port } = listener.address();
+    console.log(`Server is listening at http://${address}:${port}/`);
+  });
 };
-connections();
+
+connections().catch((err) => console.log("Connection error: " + err));

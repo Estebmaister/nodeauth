@@ -3,16 +3,19 @@
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const GitHubStrategy = require("passport-github").Strategy;
 const ObjectID = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const config = require("./config.js");
 
-module.exports = (app, db) => {
+module.exports = (app, sessionStore, db) => {
   app.use(
     session({
       secret: config.SESSION_SECRET,
       resave: true,
       saveUninitialized: true,
+      key: "express.sid",
+      store: sessionStore,
     })
   );
 
@@ -42,5 +45,47 @@ module.exports = (app, db) => {
         }
       );
     })
+  );
+
+  const tryInsert = (field, defaultValue) => {
+    try {
+      return profile[field][0].value;
+    } catch (error) {
+      return defaultValue;
+    }
+  };
+
+  passport.use(
+    new GitHubStrategy(
+      {
+        clientID: config.GITHUB_CLIENT_ID,
+        clientSecret: config.GITHUB_CLIENT_SECRET,
+        callbackURL: config.GITHUB_CALLBACK_URL,
+      },
+      (accessToken, refreshToken, profile, done) => {
+        db.collection("users").findOneAndUpdate(
+          { id: profile.id },
+          {
+            $setOnInsert: {
+              id: profile.id,
+              name: profile.displayName || "Anonymous",
+              email: tryInsert(("photos", "")),
+              email: tryInsert(("email", "No public email")),
+              created_on: new Date(),
+              provider: profile.provider || "",
+              chat_messages: 0,
+            },
+            $set: { last_login: new Date() },
+            $inc: { login_count: 1 },
+          },
+          { upsert: true, new: true }, //Insert object if not found, Return new object after modify
+          (err, user) => {
+            if (err) return done(err);
+            console.log("Db log operation success");
+            return done(null, user.value);
+          }
+        );
+      }
+    )
   );
 };

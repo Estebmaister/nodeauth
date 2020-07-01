@@ -6,7 +6,12 @@ html
 		link(rel="shortcut icon", href="/img/auth.ico", type="image/x-icon")
 		link(rel='stylesheet', type="text/css", href='/css/style.css')
 	body
+		include includes/sidebar.pug
 		- var n = 1;
 		ul(style='list-style:none;display:flex;flex-direction:column;flex-wrap:wrap;align-items:center;align-content:center;height:400px')
 			while n < 101
 				li(style='width:40px;height:40px;display:flex;justify-content:center;align-items:center;border:1px solid white;')= n++
+		//- Requiring socket.io library
+		script(src='/js/socket.io.js')
+		script.
+			var socket = io();

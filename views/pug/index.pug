@@ -9,6 +9,8 @@ html(lang="en-US")
     h1 Node server with Passport and Express
     h2#pug-success-message
     | Rendered from Pug into HTML! #{title}
+    .loginGithub
+      a(href='/auth/github') Login with Github!
     p#pug-variable=message
       | 
       a#a-login تَسْجيل دُخولٍ
@@ -118,3 +120,6 @@ html(lang="en-US")
     //- include includes/littleCat.pug
 
     script(type='application/x-javascript' src="./js/index.js")
+    script(src='/js/socket.io.js')
+    script.
+      var socket = io();

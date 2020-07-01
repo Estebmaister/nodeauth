@@ -1,0 +1,32 @@
+style
+  include ../../../public/css/sidebar.css 
+//- <!-- Sidebar -->
+#leftSidebar.sidebar.bar-block.border-right(style="display:none")
+  button.bar-large.bar-item(onclick="sidebar_close()") Close &times;
+  if !dashboard
+    a.bar-item.btn(href="/profile") Dashboard
+  a.bar-item.btn(href="/survey") Survey
+  a.bar-item.btn(href="/pickANumber") Pick a Number
+  a.bar-item.btn(href="#") Announcements #[span.tag.right 1]
+  .cont-panel.blue-grey
+    span.btn.display-topright(onclick="this.parentElement.style.display='none'") &times;
+    p Lorem ipsum box...
+    
+  a(href='/logout' style='bottom:10px;position:absolute') Logout
+script.
+  const sidebar_open = (typeOfSidebar="leftSidebar",sideOverlay="sideOverlay") => {
+    document.getElementById(typeOfSidebar).style.display = "block";
+    document.getElementById(sideOverlay).style.display = "block";
+    document.getElementById(typeOfSidebar).className += " displayed";
+    document.getElementById(sideOverlay).className += " displayed";
+  }
+
+  const sidebar_close = (typeOfSidebar="leftSidebar",sideOverlay="sideOverlay") => {
+    document.getElementById(typeOfSidebar).className = document.getElementById(typeOfSidebar).className.replace(" displayed","");
+    document.getElementById(sideOverlay).className = document.getElementById(sideOverlay).className.replace(" displayed","");
+    setTimeout(()=>document.getElementById(typeOfSidebar).style.display = "none",150)
+    setTimeout(()=>document.getElementById(sideOverlay).style.display = "none",150)
+  }
+button.btn.btn--primary.btn--sidebar(onclick="sidebar_open()") ☰
+#sideOverlay.overlay.animate-opacity(onclick="sidebar_close()" style="cursor:pointer")
+//- <!-- End Sidebar -->

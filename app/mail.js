@@ -1,9 +1,8 @@
-// Proof of concept for mail ------- ///
 const config = require("./config.js");
 const nodemailer = require("nodemailer");
 
-// async..await is not allowed in global scope, must use a wrapper
-const sendMail = async () => {
+// async ...await is not allowed in global scope, must use a wrapper
+const sendMail = async (emailAddressee) => {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   // let testAccount = await nodemailer.createTestAccount();
@@ -27,23 +26,24 @@ const sendMail = async () => {
   });
 
   // send mail with defined transport object
-  const email = {
+  const passForgottenMail = (receiver = "estebmaister@gmail.com") => ({
     from: `"Esteban Camargo NODE SERVER" <${config.EMAIL_USER}>`, // sender address
-
-    to: `${"estebmaister@gmail.com"}`, // list of receivers
-
+    to: `${receiver}`, // list of receivers
     subject: "Password recuperation ✔", // Subject line
-
     text: `We have received a solicitude to reestablish your password in our server, 
-          for establish another password you can access this link ${"link"}\n
+          for establish another password you can access this link ${"--link--"}\n
           If you didn't make this solicitude, you can delete this message.`, // plain text body
-
     html: `<b>We have received a solicitude to reestablish your password in our server, 
-          for establish another password you can access this link ${"link"}\n
-          If you didn't make this solicitude, you can delete this message.</b>`, // html body
-  };
+          for establish another password you can access the following link:</b>
+          <br>
+          ${"https://nodeauth-esteb.glitch.me"}
+          <br>
+          <br>
+          If you didn't make this solicitude, you can delete this message.`, // html body
+  });
+
   let info = await transporter
-    .sendMail(email)
+    .sendMail(passForgottenMail(emailAddressee))
     .catch((err) => console.log("Error sending message:", err));
 
   console.log("Message sent: %s", info.messageId);
@@ -55,4 +55,3 @@ const sendMail = async () => {
 };
 
 module.exports = sendMail; // mail().catch(console.error);
-// End proof of concept for mail --- ///

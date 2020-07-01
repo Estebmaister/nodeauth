@@ -8,9 +8,6 @@ html
     link(rel='stylesheet', type="text/css", href='/css/multiForm.css')
     link(rel='stylesheet', type="text/css", href='/css/sidebar.css')
   body
-    - var dashboard = true;
     include includes/sidebar.pug
-    h1 Welcome, #{username}!
-    script(src='/js/socket.io.js')
-    script.
-      var socket = io();
+    h1 Survey section!
+    include includes/multiForm.pug
