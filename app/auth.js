@@ -47,7 +47,7 @@ module.exports = (app, sessionStore, db) => {
     })
   );
 
-  const tryInsert = (field, defaultValue) => {
+  const tryInsert = (profile, field, defaultValue) => {
     try {
       return profile[field][0].value;
     } catch (error) {
@@ -68,12 +68,13 @@ module.exports = (app, sessionStore, db) => {
           {
             $setOnInsert: {
               id: profile.id,
+              username: profile.username,
               name: profile.displayName || "Anonymous",
-              email: tryInsert(("photos", "")),
-              email: tryInsert(("email", "No public email")),
-              created_on: new Date(),
+              photo: profile.photos[0].value || "",
+              email: tryInsert(profile, "emails", "No public email"),
               provider: profile.provider || "",
               chat_messages: 0,
+              created_on: new Date(),
             },
             $set: { last_login: new Date() },
             $inc: { login_count: 1 },

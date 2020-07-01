@@ -17,7 +17,7 @@ module.exports = (app, db) => {
     .get(
       passport.authenticate("github", { failureRedirect: "/" }),
       (req, res) => {
-        req.session.user_id = req.user.id;
+        // req.session.user_id = req.user.id;
         res.redirect("/profile");
       }
     );
@@ -79,8 +79,11 @@ module.exports = (app, db) => {
           db.collection("users").insertOne(
             {
               username: req.body.username.toLowerCase(),
+              name: req.body.name || "Anonymous",
               email: req.body.email,
               password: hash,
+              created_on: new Date(),
+              chat_messages: 0,
             },
             (err, doc) => {
               if (err) {
@@ -94,9 +97,7 @@ module.exports = (app, db) => {
       );
     },
     passport.authenticate("local", { failureRedirect: "/" }),
-    (req, res, next) => {
-      res.redirect("/profile");
-    }
+    (req, res) => res.redirect("/profile")
   );
 
   app.route("/logout").get((req, res) => {
