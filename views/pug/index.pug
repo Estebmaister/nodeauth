@@ -10,6 +10,7 @@ html(lang="en-US")
     h2#pug-success-message
     | Rendered from Pug into HTML! #{title}
     .loginGithub
+      br
       a(href='/auth/github') Login with Github!
     p#pug-variable=message
       | 
@@ -60,7 +61,7 @@ html(lang="en-US")
           p اسْتِئْمارة اشْتِراكٍ
           form#formRegister(action='/register', method='post')
             .input-wrapper
-              label(for='reg-email') رِسالة إيميل :
+              label(for='reg-email') البريد الإلكتروني :
               .input-group
                 span.icon
                   svg(viewbox='0 0 20 20')
@@ -68,18 +69,29 @@ html(lang="en-US")
                 input#reg-email(type='email' name='email' required placeholder='some@example.com' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$' title='It must be something like your.contact-info@domain.com')
                 br
             .input-wrapper
-              label(for='reg-username') اسْم مُسْتَخْدِمٍ :
+              label(for='reg-name') اسم :
+              .input-group
+                span.icon
+                  svg(viewbox='0 0 512 512')
+                    path(d='m326 232h-140c-8.284 0-15 6.716-15 15s6.716 15 15 15h140c8.284 0 15-6.716 15-15s-6.716-15-15-15z')
+                    path(d='m326 292h-140c-8.284 0-15 6.716-15 15s6.716 15 15 15h140c8.284 0 15-6.716 15-15s-6.716-15-15-15z')
+                    path(d='m326 352h-140c-8.284 0-15 6.716-15 15s6.716 15 15 15h140c8.284 0 15-6.716 15-15s-6.716-15-15-15z')
+                    path(d='m332.794 60.998 25.599-37.546c4.667-6.845 2.901-16.177-3.943-20.844-6.846-4.667-16.178-2.901-20.844 3.943l-29.127 42.72c-15.335-4.722-31.615-7.271-48.479-7.271s-33.143 2.549-48.479 7.271l-29.128-42.72c-4.667-6.844-13.997-8.61-20.844-3.943-6.845 4.667-8.61 13.999-3.943 20.844l25.6 37.546c-52.404 27.675-88.206 82.731-88.206 146.002v140c0 90.981 74.019 165 165 165s165-74.019 165-165v-140c0-63.27-35.802-118.327-88.206-146.002zm58.206 286.002c0 74.439-60.561 135-135 135s-135-60.561-135-135v-140c0-74.439 60.561-135 135-135 10.52 0 20.763 1.211 30.597 3.499l-19.09 27.999c-3.675-.974-7.53-1.498-11.507-1.498-24.813 0-45 20.187-45 45s20.187 45 45 45 45-20.187 45-45c0-9.937-3.244-19.128-8.719-26.581l23.485-34.445c44.539 22.084 75.234 68.034 75.234 121.026zm-120-200c0 8.271-6.729 15-15 15s-15-6.729-15-15 6.729-15 15-15 15 6.728 15 15z')
+                input#reg-name(type='text' name='name' required placeholder='esteban')
+                br
+            .input-wrapper
+              label(for='reg-username') اسم المستخدم :
               .input-group
                 span.icon
                   svg(viewbox='0 0 24 24')
                     path(d='M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z')
-                input#reg-username(type='text' name='username' required onkeyup='return forceLowerC(this);' placeholder='esteban')
+                input#reg-username(type='text' name='username' required onkeyup='return forceLowerC(this);' placeholder='estebmaister')
                 //- Script to force lower case input
                 script const forceLowerC = (strInput) => strInput.value=strInput.value.toLowerCase();
                 style #reg-username {text-transform:lowercase;}
                 br
             .input-wrapper
-              label(for='reg-password') كَلِمة سِرٍّ :
+              label(for='reg-password') كلمه السر :
                 |  
                 span#reg-caps-message
               .input-group
@@ -95,7 +107,7 @@ html(lang="en-US")
                     path.path-show(display="block" d='M510.096,249.937c-4.032-5.867-100.928-143.275-254.101-143.275C124.56,106.662,7.44,243.281,2.512,249.105 c-3.349,3.968-3.349,9.792,0,13.781C7.44,268.71,124.56,405.329,255.995,405.329S504.549,268.71,509.477,262.886 C512.571,259.217,512.848,253.905,510.096,249.937z M255.995,383.996c-105.365,0-205.547-100.48-230.997-128 c25.408-27.541,125.483-128,230.997-128c123.285,0,210.304,100.331,231.552,127.424 C463.013,282.065,362.256,383.996,255.995,383.996z M255.995,170.662c-47.061,0-85.333,38.272-85.333,85.333s38.272,85.333,85.333,85.333s85.333-38.272,85.333-85.333 S303.056,170.662,255.995,170.662z M255.995,319.996c-35.285,0-64-28.715-64-64s28.715-64,64-64s64,28.715,64,64 S291.28,319.996,255.995,319.996z')
                 br
             .input-wrapper
-              label(for='confirm-password') أَكَّدَ كَلِمة سِرٍّ :
+              label(for='confirm-password') تأكيد كلمة المرور :
                 |  
                 span#confirm-message
               .input-group

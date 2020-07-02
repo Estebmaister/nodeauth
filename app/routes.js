@@ -17,7 +17,8 @@ module.exports = (app, db) => {
     .get(
       passport.authenticate("github", { failureRedirect: "/" }),
       (req, res) => {
-        // req.session.user_id = req.user.id;
+        req.session.user_id = req.user.id;
+        console.log("github auth check");
         res.redirect("/profile");
       }
     );
@@ -43,24 +44,31 @@ module.exports = (app, db) => {
     .route("/login")
     .post(
       passport.authenticate("local", { failureRedirect: "/" }),
-      (req, res) => res.redirect("/profile")
+      (req, res) => {
+        db.collection("users").findOneAndUpdate(
+          { username: req.user.username },
+          { $set: { last_login: new Date() }, $inc: { login_count: 1 } },
+          { upsert: true, new: true }
+        );
+        res.redirect("/profile");
+      }
     );
 
   app.route("/profile").get(ensureAuthenticated, (req, res) => {
     res.render(process.cwd() + "/views/pug/profile", {
-      username: req.user.username,
+      user: req.user,
     });
   });
 
   app.route("/pickANumber").get(ensureAuthenticated, (req, res) => {
     res.render(process.cwd() + "/views/pug/pickANumber", {
-      username: req.user.username,
+      user: req.user,
     });
   });
 
   app.route("/survey").get(ensureAuthenticated, (req, res) => {
     res.render(process.cwd() + "/views/pug/survey", {
-      username: req.user.username,
+      user: req.user,
     });
   });
 
@@ -84,8 +92,12 @@ module.exports = (app, db) => {
               password: hash,
               created_on: new Date(),
               chat_messages: 0,
+              photo: "",
+              provider: "registerForm",
+              login_count: 0,
+              last_login: null,
             },
-            (err, doc) => {
+            (err, user) => {
               if (err) {
                 console.log("Error inserting user in db");
                 return res.redirect("/");
