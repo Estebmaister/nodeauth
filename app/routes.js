@@ -23,6 +23,13 @@ module.exports = (app, db) => {
       }
     );
 
+  app.get("/auth/facebook", passport.authenticate("facebook"));
+  app.get(
+    "/auth/facebook/callback",
+    passport.authenticate("facebook", { failureRedirect: "/" }),
+    (req, res) => res.redirect("/profile")
+  );
+
   app.route("/").get((req, res) => {
     res.render("pug", {
       title: "Welcome",
@@ -94,7 +101,7 @@ module.exports = (app, db) => {
               chat_messages: 0,
               photo: "",
               provider: "registerForm",
-              login_count: 0,
+              login_count: 1,
               last_login: null,
             },
             (err, user) => {

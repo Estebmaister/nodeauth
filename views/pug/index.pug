@@ -9,7 +9,9 @@ html(lang="en-US")
     h1 Node server with Passport and Express
     h2#pug-success-message
     | Rendered from Pug into HTML! #{title}
-    .loginGithub
+    .loginSocial
+      br
+      a(href='/auth/facebook') Login with Facebook!
       br
       a(href='/auth/github') Login with Github!
     p#pug-variable=message

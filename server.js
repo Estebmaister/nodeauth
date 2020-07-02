@@ -9,8 +9,9 @@ const socketServer = require("./app/socket.js");
 
 const mongoClient = require("mongodb").MongoClient;
 const express = require("express");
+const httpsLocalhost = require("https-localhost")();
 const app = require("express")();
-const http = require("http").Server(app);
+let protocol, prot;
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const sessionStore = new session.MemoryStore();
@@ -34,14 +35,23 @@ const connections = async () => {
     .catch((err) => console.log("Database error: " + err));
   console.log("Successful database connection to: " + db.s.namespace);
 
+  if (process.env.PRODUCTION === "LOCAL") {
+    const https = require("https");
+    const certs = await httpsLocalhost.getCerts();
+    protocol = https.createServer(certs, app);
+    prot = "https";
+  } else {
+    protocol = require("http").Server(app);
+    prot = "http";
+  }
   auth(app, sessionStore, db);
   routes(app, db);
-  socketServer(http, sessionStore, db);
+  socketServer(protocol, sessionStore, db);
 
   const port = config.PORT || 3001;
-  const listener = http.listen(port, "localhost", () => {
+  const listener = protocol.listen(port, "localhost", () => {
     const { address, port } = listener.address();
-    console.log(`Server is listening at http://${address}:${port}/`);
+    console.log(`Server is listening at ${prot}://${address}:${port}/`);
   });
 };
 

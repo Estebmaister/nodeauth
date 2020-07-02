@@ -14,6 +14,9 @@ const GITHUB_CLIENT_SECRET =
   process.env.LOCAL_CLIENT_SECRET || process.env.GITHUB_CLIENT_SECRET;
 const GITHUB_CALLBACK_URL = process.env.LOCAL_URL || process.env.PROJECT_URL;
 
+const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
+const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
+
 module.exports = {
   SESSION_SECRET,
   MONGO_URI,
@@ -23,4 +26,6 @@ module.exports = {
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
   GITHUB_CALLBACK_URL,
+  FACEBOOK_APP_ID,
+  FACEBOOK_APP_SECRET,
 };

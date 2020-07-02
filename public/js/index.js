@@ -17,59 +17,57 @@ if (aLogin) {
   });
 }
 
-// Show-hide password
-let iconsShow = document.getElementsByClassName("icon-show");
+// Show-hide password all icon-show class
+const iconsShow = document.getElementsByClassName("icon-show");
 const pathsHide = document.getElementsByClassName("path-hide");
 const pathsShow = document.getElementsByClassName("path-show");
-let showFlag = new Array(iconsShow.length).fill(0);
 for (let index = 0; index < iconsShow.length; index++) {
-  iconsShow[index].addEventListener("click", () => {
-    if (showFlag[index] == 0) {
-      iconsShow[index].previousSibling.type = "text";
-      pathsHide[index].style.display = "block";
-      pathsShow[index].style.display = "none";
-      showFlag[index] = 1;
-    } else {
-      iconsShow[index].previousSibling.type = "password";
-      pathsHide[index].style.display = "none";
-      pathsShow[index].style.display = "block";
-      showFlag[index] = 0;
-    }
+  iconsShow[index].addEventListener("mousedown", () => {
+    iconsShow[index].previousSibling.type = "text";
+    pathsHide[index].style.display = "block";
+    pathsShow[index].style.display = "none";
+  });
+  iconsShow[index].addEventListener("mouseup", () => {
+    iconsShow[index].previousSibling.type = "password";
+    pathsHide[index].style.display = "none";
+    pathsShow[index].style.display = "block";
   });
 }
 
 // Check CapsLock activated
 const regPassword = document.getElementById("reg-password");
 const regCapsLockMessage = document.getElementById("reg-caps-message");
-try {
-  regPassword.addEventListener("keyup", (event) => {
-    // If "caps lock" is pressed, display the warning text
+
+regPassword.addEventListener("keyup", (event) => {
+  // If "caps lock" is pressed, display the warning text
+  try {
     if (event.getModifierState("CapsLock")) {
       regCapsLockMessage.innerHTML = "Caps lock is ON";
       regCapsLockMessage.style.color = "red";
     } else {
       regCapsLockMessage.innerHTML = "";
     }
-  });
-} catch (error) {
-  console.log("Can´t check capsLock: ", error);
-}
+  } catch (error) {
+    console.log("Can´t check capsLock in #reg-password");
+  }
+});
 
 const logPassword = document.getElementById("log-password");
 const logCapsLockMessage = document.getElementById("log-caps-message");
-try {
-  logPassword.addEventListener("keyup", (event) => {
-    // If "caps lock" is pressed, display the warning text
+
+logPassword.addEventListener("keyup", (event) => {
+  // If "caps lock" is pressed, display the warning text
+  try {
     if (event.getModifierState("CapsLock")) {
       logCapsLockMessage.innerHTML = "Caps lock is ON";
       logCapsLockMessage.style.color = "red";
     } else {
       logCapsLockMessage.innerHTML = "";
     }
-  });
-} catch (error) {
-  console.log("Can´t check capsLock: ", error);
-}
+  } catch (error) {
+    console.log("Can´t check capsLock in #log-password");
+  }
+});
 
 // Check confirm password
 const confirmPassword = document.getElementById("confirm-password");
@@ -88,19 +86,3 @@ const check = () => {
   }
   if (confirmPassword.value == "") confirmMessage.innerHTML = "";
 };
-
-// ___ Little cat moving eyes ___ //
-
-const pupil = document.getElementsByClassName("pupil");
-if (pupil[1]) {
-  document.onmousemove = () => {
-    var x = (event.clientX * 4) / window.innerWidth + "%";
-    var y = (event.clientY * 8) / window.innerHeight + "%";
-
-    for (var index = 0; index < 4; index++) {
-      pupil[index].style.left = x;
-      pupil[index].style.top = y;
-      pupil[index].style.transform = "translate(" + x + "," + y + ")";
-    }
-  };
-}
