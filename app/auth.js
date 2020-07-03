@@ -61,7 +61,7 @@ module.exports = (app, sessionStore, db) => {
       {
         clientID: config.GITHUB_CLIENT_ID,
         clientSecret: config.GITHUB_CLIENT_SECRET,
-        callbackURL: config.PROJECT_URL,
+        callbackURL: config.GITHUB_CALLBACK_URL,
       },
       (accessToken, refreshToken, profile, done) => {
         db.collection("users").findOneAndUpdate(
@@ -96,7 +96,7 @@ module.exports = (app, sessionStore, db) => {
       {
         clientID: config.FACEBOOK_APP_ID,
         clientSecret: config.FACEBOOK_APP_SECRET,
-        callbackURL: "/auth/facebook/callback",
+        callbackURL: config.FACEBOOK_CALLBACK_URL,
       },
       (accessToken, refreshToken, profile, done) => {
         db.collection("users").findOneAndUpdate(

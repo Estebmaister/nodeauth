@@ -1,0 +1,84 @@
+body {
+  height: 90vh;
+  background-color: #222;
+  --color-card: #fff;
+  --color-card-hover: #ddd;
+  --color-card-active: #bbb;
+}
+.card-box {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 90vh;
+  /* border: 1px solid #fff; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  align-content: center;
+  justify-content: flex-end;
+  background-color: #222;
+}
+
+.card {
+  width: 9vw;
+  max-width: 6vh;
+  height: 8vh;
+  font-size: 0.8em;
+  font-weight: 700;
+  margin: 1px;
+  border-radius: 5%;
+  cursor: pointer;
+  border: 1px solid #000;
+  /* extras */
+  background-color: var(--color-card);
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  animation: bg-hover-enter 0.2s;
+}
+@keyframes bg-hover-enter {
+  from {
+    background-color: var(--color-card-hover);
+  }
+  to {
+    background-color: var(--color-card);
+  }
+}
+
+.card:hover {
+  background-color: var(--color-card-hover);
+  animation: bg-hover 0.2s;
+}
+@keyframes bg-hover {
+  from {
+    background-color: var(--color-card);
+  }
+  to {
+    background-color: var(--color-card-hover);
+  }
+}
+
+.card:active {
+  background-color: var(--color-card-active);
+  animation: bg-active 0.2s;
+}
+@keyframes bg-active {
+  from {
+    background-color: var(--color-card-hover);
+  }
+  to {
+    background-color: var(--color-card-active);
+  }
+}
+
+.card.disabled {
+  background-color: var(--color-card-active) !important;
+  pointer-events: none;
+  cursor: not-allowed;
+}

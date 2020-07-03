@@ -43,12 +43,14 @@ const connections = async () => {
     protocol = require("http").Server(app);
     prot = "http";
   }
+
   auth(app, sessionStore, db);
   routes(app, db);
   socketServer(protocol, sessionStore, db);
 
   const port = config.PORT || 3001;
-  const listener = protocol.listen(port, "192.168.0.4", () => {
+  const address = config.ADDRESS || "localhost";
+  const listener = protocol.listen(port, address, () => {
     const { address, port } = listener.address();
     console.log(`Server is listening at ${prot}://${address}:${port}/`);
   });

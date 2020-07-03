@@ -17,7 +17,7 @@
   --ease: cubic-bezier(0.075, 0.82, 0.165, 1);
   --duration: 350ms;
   --font-family: "Roboto", sans-serif;
-  --font-size: 1.25rem;
+  --font-size: 1.2rem;
 }
 * {
   box-sizing: border-box;
@@ -48,7 +48,9 @@ header {
 
 h1 {
   font-weight: 700;
-  font-size: calc(var(--font-size) * 2.5);
+  font-size: calc(var(--font-size) * 1.5);
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 a {
@@ -113,7 +115,7 @@ button {
   background-color: #333;
   padding: var(--space-s) var(--space-m);
   border-radius: var(--base-border-radius);
-  font-size: calc(var(--font-size) / 1.65);
+  font-size: calc(var(--font-size) / 1.25);
 }
 .btn:hover {
   color: #333;
