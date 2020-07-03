@@ -117,15 +117,8 @@ html(lang="en-US")
               
             br
             input#reg-submit.btn.btn--primary(type='submit' value='سِجِلّ')
-    p#log-register=message
-      | 
-      a#a-login تَسْجيل دُخولٍ
-      | / 
-      a#a-register سِجِلّ
-    .loginSocial
-      a.btn(href='/auth/facebook') Facebook log!
-      |  / 
-      a.btn(href='/auth/github') Github log!
+    p#log-register-switch #{message} #[a#a-login تَسْجيل دُخولٍ] / #[a#a-register سِجِلّ]
+    //- .loginSocial #[a.btn(href='/auth/facebook') Facebook log!] / #[a.btn(href='/auth/github') Github log!]
     //- include includes/footer.pug
     //- include includes/littleCat.pug
 

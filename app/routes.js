@@ -36,7 +36,7 @@ module.exports = (app, db) => {
       showRegistration: true,
       message: "Switch",
       lastLogin: req.query.log || false,
-      lastRegister: req.query.log || false,
+      lastRegister: req.query.reg || false,
     });
   });
 
@@ -49,7 +49,7 @@ module.exports = (app, db) => {
   app
     .route("/login")
     .post(
-      passport.authenticate("local", { failureRedirect: "/" }),
+      passport.authenticate("local", { failureRedirect: "/?log=true" }),
       (req, res) => {
         console.log("log attempted");
         db.collection("users").findOneAndUpdate(
@@ -89,7 +89,7 @@ module.exports = (app, db) => {
         { username: req.body.username.toLowerCase() },
         (err, user) => {
           if (err) next(err);
-          if (user) return res.redirect("/");
+          if (user) return res.redirect("/?reg=true");
           const hash = bcrypt.hashSync(req.body.password, saltRounds);
           db.collection("users").insertOne(
             {

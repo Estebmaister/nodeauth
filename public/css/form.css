@@ -120,7 +120,8 @@ input:focus {
 }
 
 #log-register-switch {
-  margin: 0;
+  margin: 0 0 1em 0;
+  font-size: calc(var(--font-size) * 0.9);
 }
 
 #password,
