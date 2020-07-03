@@ -18,40 +18,40 @@ module.exports = (app, db) => {
       passport.authenticate("github", { failureRedirect: "/" }),
       (req, res) => {
         req.session.user_id = req.user.id;
-        console.log("github auth check");
         res.redirect("/profile");
       }
     );
 
-  app.get("/auth/facebook", passport.authenticate("facebook"));
-  app.get(
-    "/auth/facebook/callback",
-    passport.authenticate("facebook", { failureRedirect: "/" }),
-    (req, res) => res.redirect("/profile")
-  );
+  app.route("/auth/facebook").get(passport.authenticate("facebook"));
+  app
+    .route("/auth/facebook/callback")
+    .get(
+      passport.authenticate("facebook", { failureRedirect: "/" }),
+      (req, res) => res.redirect("/profile")
+    );
 
   app.route("/").get((req, res) => {
     res.render("pug", {
-      title: "Welcome",
-      message: "Please",
       showLogin: true,
       showRegistration: true,
-      lastLogin: false,
-      lastRegister: false,
+      message: "Switch",
+      lastLogin: req.query.log || false,
+      lastRegister: req.query.log || false,
     });
   });
 
-  app.get("/forgot", (req, res) => res.render("pug/forgot", {}));
+  app.route("/forgot").get((req, res) => res.render("pug/forgot", {}));
 
-  app.post("/reset", (req, res) =>
-    res.render("pug/reset", { username: req.body.username })
-  );
+  app.route("/reset").post((req, res) => {
+    res.render("pug/reset", { username: req.body.username });
+  });
 
   app
     .route("/login")
     .post(
       passport.authenticate("local", { failureRedirect: "/" }),
       (req, res) => {
+        console.log("log attempted");
         db.collection("users").findOneAndUpdate(
           { username: req.user.username },
           { $set: { last_login: new Date() }, $inc: { login_count: 1 } },
@@ -102,7 +102,7 @@ module.exports = (app, db) => {
               photo: "",
               provider: "registerForm",
               login_count: 1,
-              last_login: null,
+              last_login: new Date(),
             },
             (err, user) => {
               if (err) {

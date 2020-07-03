@@ -3,8 +3,11 @@
 }
 .btn--sidebar {
   position: fixed;
+  top: 0;
+  left: 0;
   font-size: 24px;
   padding: var(--space-xs) var(--space-s);
+  z-index: 1;
 }
 .overlay {
   position: fixed;
@@ -41,7 +44,7 @@
 .sidebar {
   height: 100%;
   width: 300px;
-  background-color: #fff;
+  background-color: #333;
   position: fixed !important;
   z-index: 2;
   overflow: auto;
@@ -81,6 +84,7 @@
   white-space: normal;
   float: none;
   outline: 0;
+  border-radius: 0;
 }
 .bar-block .bar-large {
   font-size: var(--font-size);
@@ -116,6 +120,9 @@
   position: absolute;
   right: 0;
   top: 0;
+  background-color: transparent;
+  border-radius: 0;
+  height: 100%;
 }
 .border-right {
   border-right: 1px solid #ccc;

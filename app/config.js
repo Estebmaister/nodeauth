@@ -2,20 +2,22 @@
 
 require("dotenv").config();
 
-const SESSION_SECRET = process.env.SESSION_SECRET;
-const MONGO_URI = process.env.MONGO_URI;
-const PORT = process.env.PORT;
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+const conf = process.env;
 
-const GITHUB_CLIENT_ID =
-  process.env.LOCAL_CLIENT_ID || process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET =
-  process.env.LOCAL_CLIENT_SECRET || process.env.GITHUB_CLIENT_SECRET;
-const GITHUB_CALLBACK_URL = process.env.LOCAL_URL || process.env.PROJECT_URL;
+const SESSION_SECRET = conf.SESSION_SECRET;
+const MONGO_URI = conf.MONGO_URI;
+const PORT = conf.PORT;
+const EMAIL_USER = conf.EMAIL_USER;
+const EMAIL_PASSWORD = conf.EMAIL_PASSWORD;
 
-const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
-const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
+const GITHUB_CLIENT_ID = conf.L_GH_ID || conf.GH_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = conf.L_GH_SECRET || conf.GH_CLIENT_SECRET;
+const GITHUB_CALLBACK_URL = conf.GH_CALLBACK_URL;
+
+const FACEBOOK_APP_ID = conf.FB_APP_ID;
+const FACEBOOK_APP_SECRET = conf.FB_APP_SECRET;
+
+const PRODUCTION = conf.PRODUCTION;
 
 module.exports = {
   SESSION_SECRET,
@@ -28,4 +30,5 @@ module.exports = {
   GITHUB_CALLBACK_URL,
   FACEBOOK_APP_ID,
   FACEBOOK_APP_SECRET,
+  PRODUCTION,
 };

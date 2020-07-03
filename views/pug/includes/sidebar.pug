@@ -12,7 +12,10 @@ style
     span.btn.display-topright(onclick="this.parentElement.style.display='none'") &times;
     p Lorem ipsum box...
     
-  a(href='/logout' style='bottom:10px;position:absolute') Logout
+
+  a(href='/logout' style='bottom:10px;left:10px;position:absolute') Logout
+
+
 script.
   const sidebar_open = (typeOfSidebar="leftSidebar",sideOverlay="sideOverlay") => {
     document.getElementById(typeOfSidebar).style.display = "block";

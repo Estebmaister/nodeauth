@@ -50,12 +50,6 @@ h1 {
   font-weight: 700;
   font-size: calc(var(--font-size) * 2.5);
 }
-h1,
-h2,
-h3,
-h4 {
-  padding: 1em 1em 0 1em;
-}
 
 a {
   cursor: pointer;
@@ -98,7 +92,7 @@ button {
   display: inline-block;
   text-align: center;
   align-items: flex-start;
-  cursor: default;
+  cursor: pointer;
   box-sizing: border-box;
   margin: 0em;
   font: 400 13.3333px Arial;
@@ -107,14 +101,7 @@ button {
   border-style: outset;
 }
 .btn {
-  position: relative;
-  overflow: hidden;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
+  display: inline-block;
   vertical-align: middle;
   text-decoration: none;
   text-align: center;
@@ -122,13 +109,18 @@ button {
   outline: none;
   overflow: hidden;
   cursor: pointer;
-  padding: var(--space-m) var(--space-l);
+  color: #ccc;
+  background-color: #333;
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--base-border-radius);
+  font-size: calc(var(--font-size) / 1.65);
 }
 .btn:hover {
-  color: #000;
+  color: #333;
   background-color: #ccc;
 }
 .btn--primary {
+  padding: var(--space-m) var(--space-l);
   border: 2px solid transparent;
   border-radius: var(--base-border-radius);
   background-color: var(--color-primary);

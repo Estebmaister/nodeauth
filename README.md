@@ -6,7 +6,7 @@
 
 [![Workflow badge][workflow-bdg]][glitch-workflow] [![PRs Welcome][prs-bdg]][prs-site]
 
-- Created from the [FCC](https://freecodecamp.com) repository, to compile the lessons about basic authentication with passport in node.
+- Created from a task in process-lb and based on a template of the [FCC](https://freecodecamp.com) repository.
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F31OD9K)
 

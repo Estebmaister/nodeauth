@@ -6,19 +6,7 @@ html(lang="en-US")
     link(rel='stylesheet', type="text/css", href='./css/style.css')
 
   body
-    h1 Node server with Passport and Express
-    h2#pug-success-message
-    | Rendered from Pug into HTML! #{title}
-    .loginSocial
-      br
-      a(href='/auth/facebook') Login with Facebook!
-      br
-      a(href='/auth/github') Login with Github!
-    p#pug-variable=message
-      | 
-      a#a-login تَسْجيل دُخولٍ
-      | / 
-      a#a-register سِجِلّ
+    h1 Node Auth Server
     if lastLogin
       p#last-login(style="color:red") Last login was fail
     if lastRegister
@@ -129,7 +117,15 @@ html(lang="en-US")
               
             br
             input#reg-submit.btn.btn--primary(type='submit' value='سِجِلّ')
-    
+    p#log-register=message
+      | 
+      a#a-login تَسْجيل دُخولٍ
+      | / 
+      a#a-register سِجِلّ
+    .loginSocial
+      a.btn(href='/auth/facebook') Facebook log!
+      |  / 
+      a.btn(href='/auth/github') Github log!
     //- include includes/footer.pug
     //- include includes/littleCat.pug
 

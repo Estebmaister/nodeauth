@@ -2,8 +2,9 @@
 
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const GitHubStrategy = require("passport-github").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const ObjectID = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const config = require("./config.js");
@@ -60,7 +61,7 @@ module.exports = (app, sessionStore, db) => {
       {
         clientID: config.GITHUB_CLIENT_ID,
         clientSecret: config.GITHUB_CLIENT_SECRET,
-        callbackURL: "/auth/github/callback",
+        callbackURL: config.PROJECT_URL,
       },
       (accessToken, refreshToken, profile, done) => {
         db.collection("users").findOneAndUpdate(
@@ -82,15 +83,13 @@ module.exports = (app, sessionStore, db) => {
           { upsert: true, returnOriginal: false }, //Insert object if not found, Return new object after modify
           (err, user) => {
             if (err) return done(err);
-            console.log("Db log operation success");
+            console.log("Db gh-social-log op success");
             return done(null, user.value);
           }
         );
       }
     )
   );
-
-  const FacebookStrategy = require("passport-facebook").Strategy;
 
   passport.use(
     new FacebookStrategy(
@@ -119,8 +118,7 @@ module.exports = (app, sessionStore, db) => {
           { upsert: true, returnOriginal: false }, //Insert object if not found, Return new object after modify
           (err, user) => {
             if (err) return done(err);
-            console.log(profile);
-            console.log("Db log operation success");
+            console.log("Db fb-social-log op success");
             return done(null, user.value);
           }
         );

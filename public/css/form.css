@@ -2,8 +2,8 @@
 #formLogin,
 #formRegister,
 #formForgot {
-  flex: 1 1 0;
-  /* -webkit-box-flex: 1;
+  /* flex: 1 1 0;
+  -webkit-box-flex: 1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -11,7 +11,6 @@
   align-items: flex-end;
   align-content: flex-end; */
   text-align: left;
-  padding-left: 70px;
   width: fit-content;
 }
 
@@ -120,13 +119,22 @@ input:focus {
   color: var(--color-primary);
 }
 
+#log-register-switch {
+  margin: 0;
+}
+
 #password,
 #reg-password {
   padding-right: calc(var(--space-s) + 50px);
 }
+
 #forgot-password {
+  margin: 5px 0;
   display: block;
   text-align: right;
-  color: var(--color-primary);
   font-size: calc(var(--font-size) * 0.9);
+}
+
+.loginSocial {
+  margin-bottom: 10px;
 }

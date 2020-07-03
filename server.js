@@ -35,10 +35,9 @@ const connections = async () => {
     .catch((err) => console.log("Database error: " + err));
   console.log("Successful database connection to: " + db.s.namespace);
 
-  if (process.env.PRODUCTION === "LOCAL") {
-    const https = require("https");
+  if (config.PRODUCTION === "LOCAL") {
     const certs = await httpsLocalhost.getCerts();
-    protocol = https.createServer(certs, app);
+    protocol = require("https").createServer(certs, app);
     prot = "https";
   } else {
     protocol = require("http").Server(app);
@@ -49,7 +48,7 @@ const connections = async () => {
   socketServer(protocol, sessionStore, db);
 
   const port = config.PORT || 3001;
-  const listener = protocol.listen(port, "localhost", () => {
+  const listener = protocol.listen(port, "192.168.0.4", () => {
     const { address, port } = listener.address();
     console.log(`Server is listening at ${prot}://${address}:${port}/`);
   });
