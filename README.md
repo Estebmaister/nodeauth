@@ -2,7 +2,7 @@
 
 ========================================
 
-![GitHub package.json version][gh-pack-json-v] ![Package.json express version][gh-pack-json-dep-v-express] ![Package.json mongodb version][gh-pack-json-dep-v-mongodb] ![Package.json passport version][gh-pack-json-dep-v-passport] ![GitHub code size in bytes][code-size-bdg] ![Last commit][last-commit-bdg] [![Website][website-bdg]][website] [![MIT License][license-bdg]][license] [![Twitter Follow][twitter-bdg]][twitter]
+![GitHub package.json version][gh-pack-json-v] ![Package.json express version][gh-pack-json-dep-v-express] ![Package.json mongodb version][gh-pack-json-dep-v-mongodb] ![Package.json passport version][gh-pack-json-dep-v-passport] ![GitHub code size in bytes][code-size-bdg] ![Last commit][last-commit-bdg] [![Website][website-bdg]][website] [![MIT License][license-bdg]][license] [![Twitter Follow][twitter-bdg]][twitter] [![Coverage Status](https://coveralls.io/repos/github/Estebmaister/nodeauth/badge.svg?branch=master)](https://coveralls.io/github/Estebmaister/nodeauth?branch=master)
 
 [![Workflow badge][workflow-bdg]][glitch-workflow] [![PRs Welcome][prs-bdg]][prs-site]
 

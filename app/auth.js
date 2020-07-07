@@ -8,6 +8,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const ObjectID = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const config = require("./config.js");
+const chalk = require("chalk");
+const log = console.log;
 
 module.exports = (app, sessionStore, db) => {
   app.use(
@@ -37,7 +39,7 @@ module.exports = (app, sessionStore, db) => {
       db.collection("users").findOne(
         { username: username.toLowerCase() },
         (err, user) => {
-          console.log("User " + username + " attempted to log in.");
+          log(chalk.yellow(`User ${username} attempted to log in`));
           if (err) return done(err);
           if (!user) return done(null, false);
           if (!bcrypt.compareSync(password, user.password))
@@ -48,6 +50,7 @@ module.exports = (app, sessionStore, db) => {
     })
   );
 
+  // Function to try insert a field that can be public or not
   const tryInsert = (profile, field, defaultValue) => {
     try {
       return profile[field][0].value;
@@ -83,7 +86,7 @@ module.exports = (app, sessionStore, db) => {
           { upsert: true, returnOriginal: false }, //Insert object if not found, Return new object after modify
           (err, user) => {
             if (err) return done(err);
-            console.log("Db gh-social-log op success");
+            log(chalk.yellow("Db gh-social-log op success"));
             return done(null, user.value);
           }
         );
@@ -118,7 +121,7 @@ module.exports = (app, sessionStore, db) => {
           { upsert: true, returnOriginal: false }, //Insert object if not found, Return new object after modify
           (err, user) => {
             if (err) return done(err);
-            console.log("Db fb-social-log op success");
+            log(chalk.yellow("Db fb-social-log op success"));
             return done(null, user.value);
           }
         );

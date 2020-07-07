@@ -3,6 +3,8 @@
 const config = require("./config.js");
 const passportSocketIo = require("passport.socketio");
 const cookieParser = require("cookie-parser");
+const chalk = require("chalk");
+const log = console.log;
 
 module.exports = (http, sessionStore, db) => {
   const io = require("socket.io")(http);
@@ -19,9 +21,7 @@ module.exports = (http, sessionStore, db) => {
 
   io.on("connection", (socket) => {
     ++currentUsers;
-    console.log(
-      "User " + socket.request.user.username + " connected to socket"
-    );
+    log(chalk.blue`User ${socket.request.user.username} connected to socket`);
 
     io.emit("user", {
       name: socket.request.user.username,
@@ -31,9 +31,14 @@ module.exports = (http, sessionStore, db) => {
 
     io.emit("user count", currentUsers);
 
+    socket.on("chat message", (message) => {
+      log(chalk.keyword("orange")("Message send it"));
+      io.emit("chat message", { name: socket.request.user.username, message });
+    });
+
     socket.on("disconnect", () => {
-      console.log(
-        "User " + socket.request.user.username + " disconnected from socket"
+      log(
+        chalk.blue`User ${socket.request.user.username} disconnected from socket`
       );
       --currentUsers;
       io.emit("user count", currentUsers);

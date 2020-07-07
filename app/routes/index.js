@@ -3,32 +3,18 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const saltRounds = 12;
+const chalk = require("chalk");
+const log = console.log;
 
 module.exports = (app, db) => {
+  // Import and mount the authRouter
+  const authRouter = require("./extAuth.js");
+  app.use("/auth", authRouter);
+
   const ensureAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) return next();
     res.redirect("/");
   };
-
-  app.route("/auth/github").get(passport.authenticate("github"));
-
-  app
-    .route("/auth/github/callback")
-    .get(
-      passport.authenticate("github", { failureRedirect: "/" }),
-      (req, res) => {
-        req.session.user_id = req.user.id;
-        res.redirect("/profile");
-      }
-    );
-
-  app.route("/auth/facebook").get(passport.authenticate("facebook"));
-  app
-    .route("/auth/facebook/callback")
-    .get(
-      passport.authenticate("facebook", { failureRedirect: "/" }),
-      (req, res) => res.redirect("/profile")
-    );
 
   app.route("/").get((req, res) => {
     res.render("pug", {
@@ -51,7 +37,7 @@ module.exports = (app, db) => {
     .post(
       passport.authenticate("local", { failureRedirect: "/?log=true" }),
       (req, res) => {
-        console.log("log attempted");
+        log(chalk.yellow("local-log successful"));
         db.collection("users").findOneAndUpdate(
           { username: req.user.username },
           { $set: { last_login: new Date() }, $inc: { login_count: 1 } },
@@ -106,7 +92,7 @@ module.exports = (app, db) => {
             },
             (err, user) => {
               if (err) {
-                console.log("Error inserting user in db");
+                log(chalk.red(`Db error inserting user: ${err}`));
                 return res.redirect("/");
               }
               next(null, user);

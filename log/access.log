@@ -1,0 +1,4 @@
+192.168.0.4 - - [07/Jul/2020:05:30:58 +0000] "GET /lol HTTP/1.1" 404 4346 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"
+192.168.0.4 - - [07/Jul/2020:05:30:58 +0000] "GET /css/404.css HTTP/1.1" 200 4659 "https://192.168.0.4:3000/lol" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"
+192.168.0.4 - - [07/Jul/2020:05:31:30 +0000] "GET /lol HTTP/1.1" 404 4346 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"
+192.168.0.4 - - [07/Jul/2020:05:31:30 +0000] "GET /css/404.css HTTP/1.1" 200 4659 "https://192.168.0.4:3000/lol" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"

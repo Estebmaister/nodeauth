@@ -6,13 +6,23 @@ html
 		link(rel="shortcut icon", href="/img/auth.ico", type="image/x-icon")
 		link(rel='stylesheet', type="text/css", href='/css/style.css')
 		link(rel='stylesheet', type="text/css", href='/css/pickANumber.css')
+		link(rel='stylesheet', type="text/css", href='/css/chat.css')
 	body
 		include includes/sidebar.pug
+		.chat
+			p#num-users
+			.chat-box
+				ul#messages
+				//- No action or method on purpose
+				form#chat-form(action='')
+					input#message-input(autocomplete='off')
+					button.btn.btn--primary Send
 		- var n = 1;
+		- var avi = 'available'
 		ul.card-box
 			while n < 101
-				li.card.white(onclick="this.className+=' disabled'")= n++
+				li.card.white(class=avi onclick="this.className+=' disabled'") #{n++}
+		
 		//- Requiring socket.io library
 		script(src='/js/socket.io.js')
-		script.
-			var socket = io();
+		script(src='/js/client.js')
