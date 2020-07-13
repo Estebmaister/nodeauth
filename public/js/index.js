@@ -1,6 +1,3 @@
-// trying something new
-window.navigator.vibrate(200);
-
 // ___ Register Form Functionalities ___ //
 
 // ___  Switch between LOGIN & REGISTER FORM ___ //
@@ -11,10 +8,12 @@ if (aLogin) {
   const divLogin = document.querySelector(".login");
   const divRegister = document.querySelector(".register");
   aLogin.addEventListener("click", () => {
+    navigator.vibrate(50);
     divLogin.style.display = "inline-block";
     divRegister.style.display = "none";
   });
   aRegister.addEventListener("click", () => {
+    navigator.vibrate(50);
     divRegister.style.display = "inline-block";
     divLogin.style.display = "none";
   });
