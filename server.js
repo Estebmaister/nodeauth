@@ -33,12 +33,14 @@ const accessLogStream = rfs.createStream("access.log", {
   path: process.cwd() + "/log",
 });
 // log only 4xx and 5xx responses to console
-app.use(morgan("dev", { skip: (req, res) => res.statusCode < 400 }));
+app.use(morgan("dev", { skip: (req, res) => res.statusCode <= 400 }));
 // log all requests to access.log
 app.use(morgan("combined", { stream: accessLogStream }));
 
+app.use(require("feature-policy")({ features: { vibrate: ["'self'"] } }));
 app.use(
   helmet({
+    referrerPolicy: { policy: "same-origin" },
     hidePoweredBy: { setTo: "PHP 4.2.0" },
     frameguard: {
       // configure

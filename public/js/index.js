@@ -1,3 +1,6 @@
+// trying something new
+window.navigator.vibrate(200);
+
 // ___ Register Form Functionalities ___ //
 
 // ___  Switch between LOGIN & REGISTER FORM ___ //
