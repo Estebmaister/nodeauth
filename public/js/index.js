@@ -8,14 +8,14 @@ if (aLogin) {
   const divLogin = document.querySelector(".login");
   const divRegister = document.querySelector(".register");
   aLogin.addEventListener("click", () => {
-    navigator.vibrate(50);
     divLogin.style.display = "inline-block";
     divRegister.style.display = "none";
+    navigator.vibrate(50);
   });
   aRegister.addEventListener("click", () => {
-    navigator.vibrate(50);
     divRegister.style.display = "inline-block";
     divLogin.style.display = "none";
+    navigator.vibrate(50);
   });
 }
 
