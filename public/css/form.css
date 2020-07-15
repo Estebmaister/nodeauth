@@ -1,7 +1,8 @@
 /*Form style*/
 #formLogin,
 #formRegister,
-#formForgot {
+#formForgot,
+#formResetPass {
   /* flex: 1 1 0;
   -webkit-box-flex: 1;
   display: flex;
@@ -121,13 +122,15 @@ input:focus {
 
 #log-register-switch,
 #reg-caps-message,
-#log-caps-message {
+#log-caps-message,
+#res-caps-message {
   margin: 0 0 1em 0;
   font-size: calc(var(--font-size) * 0.8);
 }
 
 #password,
-#reg-password {
+#reg-password,
+#res-password {
   padding-right: calc(var(--space-s) + 50px);
 }
 
