@@ -7,21 +7,23 @@ const conf = process.env;
 const SESSION_SECRET = conf.SESSION_SECRET;
 const MONGO_URI = conf.MONGO_URI;
 const PORT = conf.PORT;
+const PROJECT_URL = conf.PROJECT_URL;
 const EMAIL_USER = conf.EMAIL_USER;
 const EMAIL_PASSWORD = conf.EMAIL_PASSWORD;
 
 const GITHUB_CLIENT_ID = conf.L_GH_ID || conf.GH_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = conf.L_GH_SECRET || conf.GH_CLIENT_SECRET;
-const GITHUB_CALLBACK_URL = `${conf.PROJECT_URL}${conf.GH_CALLBACK_URL}`;
+const GITHUB_CALLBACK_URL = `${PROJECT_URL}${conf.GH_CALLBACK_URL}`;
 
 const FACEBOOK_APP_ID = conf.FB_APP_ID;
 const FACEBOOK_APP_SECRET = conf.FB_APP_SECRET;
-const FACEBOOK_CALLBACK_URL = `${conf.PROJECT_URL}${conf.FB_CALLBACK_URL}`;
+const FACEBOOK_CALLBACK_URL = `${PROJECT_URL}${conf.FB_CALLBACK_URL}`;
 
 const PRODUCTION = conf.PRODUCTION;
 const ADDRESS = conf.ADDRESS;
 
 module.exports = {
+  PROJECT_URL,
   SESSION_SECRET,
   MONGO_URI,
   PORT,
