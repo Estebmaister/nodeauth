@@ -1,31 +1,24 @@
 "use strict";
-
+// ______ IMPORTING SECTION ________ //
 const socketServer = require("./app/socket.js");
 const config = require("./app/config.js");
 const routes = require("./app/routes");
 const auth = require("./app/auth.js");
-//const mail = require("./app/mail.js");
-//mail().catch(console.error);
-
-const express = require("express");
-const helmet = require("helmet");
+// Requiring node modules
+const helmet = require("helmet"); // Security
+const express = require("express"); // Server
+const httpsLocalhost = require("https-localhost")();
 const app = express();
 let protocol, prot;
-const session = require("express-session");
+const session = require("express-session"); // Authentication
 const cookieParser = require("cookie-parser");
 const sessionStore = new session.MemoryStore();
-const mongoClient = require("mongodb").MongoClient;
-const httpsLocalhost = require("https-localhost")();
-
-const chalk = require("chalk");
+const mongoClient = require("mongodb").MongoClient; // Database
+// Requiring loggers middleware modules
 const rfs = require("rotating-file-stream");
 const morgan = require("morgan");
+const chalk = require("chalk");
 const os = require("os");
-
-const cpuCount = os.cpus().length;
-const error = chalk.bold.red;
-const log = console.log;
-log(cpuCount, "CPU's running");
 
 // create a rotating write stream
 const accessLogStream = rfs.createStream("access.log", {
@@ -34,20 +27,20 @@ const accessLogStream = rfs.createStream("access.log", {
 });
 // log only 4xx and 5xx responses to console
 app.use(morgan("dev", { skip: (req, res) => res.statusCode <= 400 }));
-// log all requests to access.log
+// log all requests to access.log file
 app.use(morgan("combined", { stream: accessLogStream }));
+const cpuCount = os.cpus().length;
+log(cpuCount, "CPU's running"); // log CPU data
+const error = chalk.bold.red;
+const log = console.log;
 
-app.use(require("feature-policy")({ features: { vibrate: ["'self'"] } }));
+// ______ CONFIGURATION MIDDLEWARE ________ //
 app.use(
   helmet({
     referrerPolicy: { policy: "same-origin" },
     hidePoweredBy: { setTo: "PHP 4.2.0" },
-    frameguard: {
-      // configure
-      action: "deny",
-    },
+    frameguard: { action: "deny" }, // configuring
     contentSecurityPolicy: {
-      // enable and configure
       directives: {
         defaultSrc: ["'self'"],
         styleSrc: ["'self'", "'unsafe-inline'"],
@@ -56,15 +49,15 @@ app.use(
         imgSrc: ["'self'", "https://avatars2.githubusercontent.com/"],
         fontSrc: ["'self'"],
       },
-    },
-    dnsPrefetchControl: false, // disable
+    }, // enabling and configuring
+    dnsPrefetchControl: false, // disabling
   })
-);
+); // Helmet Security Middleware
+app.use(require("feature-policy")({ features: { vibrate: ["'self'"] } }));
 app.use(cookieParser());
 app.use("/", express.static(process.cwd() + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.set("view engine", "pug");
 
 // ______ CONNECTIONS TO DB & PORT ________ //
@@ -99,5 +92,4 @@ const connections = async () => {
     log(chalk`Server is listening at {green ${prot}://${address}:${port}/}`);
   });
 };
-
 connections().catch((err) => log(error(`Connection error: ${err}`)));

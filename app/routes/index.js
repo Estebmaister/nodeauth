@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const saltRounds = 12;
 const chalk = require("chalk");
 const log = console.log;
+const sendMail = require("../mail.js");
+// mail().catch(console.error);
 
 module.exports = (app, db) => {
   // Import and mount the authRouter
@@ -26,11 +28,50 @@ module.exports = (app, db) => {
     });
   });
 
-  app.route("/forgot").get((req, res) => res.render("pug/forgot", {}));
+  app
+    .route("/forgot")
+    .get((req, res) => res.render("pug/forgot", {}))
+    .post((req, res, next) => {
+      const userID = req.query.userID;
+      const hash = bcrypt.hashSync(req.body.password, saltRounds);
+      db.collection("users").findOneAndUpdate(
+        { _id: new ObjectID(userID) },
+        { $set: { password: hash } },
+        { upsert: true, new: true }, //No insert object if not found, Return new object after modify
+        (err, user) => {
+          if (err) return next(err);
+          log("success pw change in", user.value._id);
+          return res.redirect("/");
+        }
+      );
 
-  app.route("/reset").post((req, res) => {
-    res.render("pug/reset", { username: req.body.username });
-  });
+      // res.render("pug/forgot", { message: true });
+    });
+  const ObjectID = require("mongodb").ObjectID;
+  app
+    .route("/reset")
+    .post((req, res, next) => {
+      const username = req.body.username.toLowerCase();
+      db.collection("users").findOne({ username }, (err, user) => {
+        if (err) next(err);
+        if (!user) return res.render("pug/reset", { username, noUser: true });
+        log("About to send the email to: ", user.email, user._id);
+        res.render("pug/reset", { username, noUser: false });
+        /*sendMail(user.email, user._id).catch((err) =>
+          log("error sending message", err)
+        );*/
+      });
+    })
+    .get((req, res, next) => {
+      const userID = req.query.userID;
+      db.collection("users").findOne({ _id: ObjectID(userID) }, (err, user) => {
+        if (err) next(err);
+        if (!user) return res.render("pug/reset", { noUser: true });
+        const username = user.username;
+        log(userID);
+        res.render("pug/reset", { username, noUser: false, userID });
+      });
+    });
 
   app
     .route("/login")
@@ -93,7 +134,7 @@ module.exports = (app, db) => {
             (err, user) => {
               if (err) {
                 log(chalk.red(`Db error inserting user: ${err}`));
-                return res.redirect("/");
+                return res.redirect("/?reg=true");
               }
               next(null, user);
             }
